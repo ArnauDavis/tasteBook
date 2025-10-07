@@ -13,6 +13,8 @@ router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/favoritePost/:id", postsController.favoritePost);
 
+router.put("/unfavoritePost/:id", postsController.unfavoritePost);
+
 router.delete("/deletePost/:id", postsController.deletePost);
 
 module.exports = router;

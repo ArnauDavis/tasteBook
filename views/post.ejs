@@ -14,7 +14,14 @@
         </form> -->
         <form
           class="col-1"
-          action="/post/favoritePost/<%= user.id %>?_method=PUT"
+          action="/post/favoritePost/<%= post.id %>?_method=PUT"
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        </form>
+        <form
+          class="col-1"
+          action="/post/unfavoritePost/<%= post.id %>?_method=PUT"
           method="POST"
         >
           <button class="btn btn-primary fa fa-heart" type="submit"></button>

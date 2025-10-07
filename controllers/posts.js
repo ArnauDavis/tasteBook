@@ -62,14 +62,32 @@ module.exports = {
   // },
     favoritePost: async (req, res) => {
     try {
-      // await Post.findOneAndUpdate(
-      //   { _id: req.params.id },
-      //   {
-      //     $inc: { likes: 1 },
-      //   }
-      // );
-      console.log(req.params.id, req.user.id);
-      res.redirect(`/post/${req.params.id}`);
+      let user = req.user.id
+      let post = req.params.id
+      await Post.findByIdAndUpdate(
+        post,
+        { '$push': { favorites: user } },
+        { new: true }
+      );
+
+      console.log(user,post);
+      res.redirect(`/post/${post}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  unfavoritePost : async (req, res) => {
+    try {
+      let user = req.user.id
+      let post = req.params.id
+      await Post.findByIdAndUpdate(
+        post,
+        { '$pull': { favorites: user } },
+        { new: true }
+      );
+
+      console.log(user,post);
+      res.redirect(`/post/${post}`);
     } catch (err) {
       console.log(err);
     }
