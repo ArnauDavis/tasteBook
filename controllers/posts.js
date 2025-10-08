@@ -69,8 +69,6 @@ module.exports = {
         { '$push': { favorites: user } },
         { new: true }
       );
-
-      console.log(user,post);
       res.redirect(`/post/${post}`);
     } catch (err) {
       console.log(err);
@@ -85,8 +83,6 @@ module.exports = {
         { '$pull': { favorites: user } },
         { new: true }
       );
-
-      console.log(user,post);
       res.redirect(`/post/${post}`);
     } catch (err) {
       console.log(err);

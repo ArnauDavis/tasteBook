@@ -6,8 +6,11 @@ check back for updates!
 
 # Current tasks
 
-- Create path for users to favorite an item
-  - ensure model holds array of user IDs correctly
+--figure out how/where to import styles
+
+--style project
+  --clarification incoming
+
 
 
 ---
