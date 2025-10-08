@@ -19,6 +19,7 @@
                             Profile
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="bi bi-heart-fill me-2"></i>
@@ -31,16 +32,22 @@
 
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-<% if (page=='/profile') { %>
-  <%- include('profile') -%>
-<% } else if(page=='/feed') { %>
-  <%- include('feed') -%>
-<% } %>
-
-</main>
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2"><%= page=='/feed' ? 'Dashboard' : page=='/profile' ? user.userName+"'s Profile" : ''  %></h1>
+            <button id="sidebarToggle" class="btn btn-primary d-md-none">
+                    <i class="bi bi-list"></i>
+                </button>
+        </div>
+            <% if (page=='/profile') { %>
+              <%- include('profile') -%>
+            <% } else if(page=='/feed') { %>
+              <%- include('feed') -%>
+            <% }%>
+            
+        </main>
     </div>
-</div>
+    </div>
 
 <%- include('partials/footer') -%>
 
@@ -50,6 +57,10 @@
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebarToggle');
             const body = document.body;
+
+            if (window.innerWidth <= 767.98) {
+            sidebar.classList.add('sidebar-hidden');
+        }
 
             sidebarToggle.addEventListener('click', function() {
                 sidebar.classList.toggle('sidebar-hidden');
