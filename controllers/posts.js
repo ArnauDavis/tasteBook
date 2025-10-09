@@ -1,10 +1,12 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const User = require("../models/User")
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
+      console.log(req.url)
       res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -21,8 +23,12 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+      const postCreator = await User.findById(post.user)
+      const postProfile = postCreator.id 
+      const userName = postCreator.userName
+      const visitorId = req.user.id
       // const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
-      res.render("post.ejs", {page: req.url, post: post, user: req.user});
+      res.render("post.ejs", {page: req.url, post: post, user: userName, postProfile: postProfile, visitorId:visitorId});
     } catch (err) {
       console.log(err);
     }
