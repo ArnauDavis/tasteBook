@@ -15,6 +15,8 @@ check back for updates!
 
 --make images on feed and profile same size in 2 order columns 
 
---turn actual post user id into user name
+--turn actual post user id into user name (actually wasn't too bad and I even realized I can get the actual poster user info too, how cool)
+
+-secret task, I want to fix post into a component so I don't have to render it with a new dashboard, header, etc
 
 ---

@@ -19,7 +19,14 @@
                             Profile
                         </a>
                     </li>
-                    
+                    <% if (post) { %>
+    <li class=" <%= page === '/post/' + post.id ? 'nav-item' : 'd-none' %>">
+        <a class="nav-link <%= page === '/post/' + post.id ? 'active' : '' %>" href="/post/<%= post.id %>">
+            <i class="bi bi-journal-text me-2"></i>
+            <%= post.title %>
+        </a>
+    </li>
+<% } %>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="bi bi-heart-fill me-2"></i>
@@ -43,6 +50,8 @@
               <%- include('profile') -%>
             <% } else if(page=='/feed') { %>
               <%- include('feed') -%>
+            <%} else if(page=='/post') { %>
+              <%- include('post') -%>
             <% }%>
             
         </main>
