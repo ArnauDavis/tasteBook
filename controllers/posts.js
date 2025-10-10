@@ -13,7 +13,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("mainDash.ejs", {page: req.url, posts: posts });
+      res.render("mainDash.ejs", {page: req.url, posts: posts, visitorId: req.user.id });
     } catch (err) {
       console.log(err);
     }
