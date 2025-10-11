@@ -20,16 +20,19 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/profile">
+                        <a class="nav-link active" href="#">
                             <i class="bi bi-journal-text me-2"></i>
                             <%=user+"'s Post" %>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/favorites">
                             <i class="bi bi-heart-fill me-2"></i>
                             Favorites
                         </a>
+                    </li>
+                    <li class="nav-item mt-5">
+                        <a href="/logout" class="btn btn-primary">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +51,7 @@
         </div>
 
       <div class="row justify-content-center">
-        <div class="card row justify-content-center mt-3 pt-3 bg-light" style="max-width:320px">
+        <div class="card row justify-content-center mt-3 pt-3 bg-light w-70 w-sm-50 w-md-70 mx-auto">
           <img src="<%= post.image%>" class="card-img-top" alt="Product Image">
           <div class="card-body">
               <h5 class="card-title"><%= post.title %></h5>
@@ -76,7 +79,7 @@
                   <div class="d-flex align-items-center">
                     <i class="fa fa-heart text-danger me-1"></i>
                       <small class="text-muted me-2"><%= post.favorites.length %></small>
-                    <%if(post.user == user.id){ %>
+                    <%if(post.user == visitorId){ %>
                       <form
                         action="/post/deletePost/<%= post.id %>?_method=DELETE"
                         method="POST"

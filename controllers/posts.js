@@ -4,7 +4,7 @@ const User = require("../models/User")
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" });
       res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -14,6 +14,14 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("mainDash.ejs", {page: req.url, posts: posts, visitorId: req.user.id });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFavorites: async (req, res) => {
+    try {
+      const posts = await Post.find({ favorites: req.user.id }).sort({ createdAt: "desc" });
+      res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }

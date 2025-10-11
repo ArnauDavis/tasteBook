@@ -18,11 +18,15 @@
                             <i class="bi bi-person-circle me-2"></i>
                             Profile
                         </a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link <%= page=='/favorites' ? 'active' : '' %>" href="/favorites">
                             <i class="bi bi-heart-fill me-2"></i>
                             Favorites
                         </a>
+                    </li>
+                    <li class="nav-item mt-5">
+                        <a href="/logout" class="btn btn-primary">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +36,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2"><%= page=='/feed' ? 'Dashboard' : page=='/profile' ? user.userName+"'s Profile" : ''  %></h1>
+            <h1 class="h2"><%= page=='/feed' ? 'Dashboard' : page=='/profile' ? user.userName+"'s Profile" : user.userName+"'s Favorites"  %></h1>
             <button id="sidebarToggle" class="btn btn-primary d-md-none">
                     <i class="bi bi-list"></i>
                 </button>
@@ -41,6 +45,8 @@
               <%- include('profile') -%>
             <% } else if(page=='/feed') { %>
               <%- include('feed') -%>
+            <%} else if(page=='/favorites') { %>
+              <%- include('favorites') -%>
             <%} %>
 
             
