@@ -19,6 +19,7 @@ check back for updates!
 --turn actual post user id into user name (actually wasn't too bad and I even realized I can get the actual poster user info too, how cool)
 
 -secret task, I want to fix post into a component so I don't have to render it with a new dashboard, header, etc
+  -I also want the feed to feature the ability to favorite and unfavorite posts
 
 ---
 
