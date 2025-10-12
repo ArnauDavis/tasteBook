@@ -25,6 +25,8 @@ check back for updates!
 
 --things learned
 
+-a ton of bootstrap
+
 -how to create an array of user ids who have favorited a post in my mongodb schema
 "favorites:{
     type: [mongoose.Schema.Types.ObjectId],
