@@ -13,6 +13,26 @@
     background: linear-gradient(135deg, #373b44, #4286f4);
 }
 
+
+/*header styles*/
+.gradient-text {
+    background: linear-gradient(45deg, #373b44 0%, #4286f4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+}
+
+.header-icon {
+    height: 80px;
+    width: 80px;
+    margin-left: 10px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+
 /* footer styles*/
 
 footer {
@@ -23,6 +43,11 @@ footer {
 
   .social-icons a {
     font-size: 1.25rem;
+  }
+
+  .link-hover:hover {
+    color: var(--bs-primary)!important;
+    transition: color 0.3s ease-in-out;
   }
 
 
