@@ -4,7 +4,7 @@
           <div class="text-center mt-4">
             <p>You do not need to enter a real email address, just remember what ever email you type in because you will need it to log back in</p>
           </div>
-            <section class="col-12 col-md-6 mt-4">
+            <section class="col-12 col-md-6 my-3">
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
                         <div class="alert alert-danger"><%= el.msg %></div>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="text-center text-muted mt-3">
                                 <p>Don't want to make an account?</p>
-                                <span>Login with:</span>
+                                <span><a href="/login" class="text-decoration-none">Login</a> with:</span>
                                 <br>
                                 <span>email: guest@guest.com</span>
                                 <br>
@@ -34,20 +34,20 @@
                             <form action="/signup" method="POST">
                               <div class="mb-4">
                                     <label for="userName" class="form-label text-muted">Username</label>
-                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Username" required>
+                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Username">
                                 </div>
                                 <div class="mb-4">
                                     <label for="exampleInputEmail1" class="form-label text-muted">Email Address</label>
-                                    <input required type="email" class="form-control" id="exampleInputEmail1" placeholder="Email Address" aria-describedby="emailHelp" name="email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email Address" aria-describedby="emailHelp" name="email">
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                                 </div>
                                 <div class="mb-4">
                                     <label for="password" class="form-label text-muted">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                                 </div>
                                 <div class="mb-4">
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword" required>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
                                 </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-dark btn-lg">Sign up</button>
