@@ -5,6 +5,13 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  bio: {type: String, 
+      default: 'This is where my bio would be if I had one'
+      },
+  profilePic:{type: String,
+        default:"imgs/defaultProfilePic.png"
+  },
+
 });
 
 // Password hash middleware.
