@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
   profilePic:{type: String,
         default:"imgs/defaultProfilePic.png"
   },
+  cloudinaryId: {
+        type: String,
+        default: null
+    }
 
 });
 
