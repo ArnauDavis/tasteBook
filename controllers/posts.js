@@ -34,6 +34,7 @@ module.exports = {
       const userName = postCreator.userName
       const visitorId = req.user.id
       // const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).lean();
+      console.log(postCreator)
       res.render("post.ejs", {page: req.url, post: post, user: userName, postProfile: postProfile, visitorId:visitorId});
     } catch (err) {
       console.log(err);

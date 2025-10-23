@@ -1,0 +1,30 @@
+ <%- include('partials/header') -%>
+
+<div class="container mt-5">
+    <h1 class="mb-4"><%=userName+"'s Profile" %></h1>
+    <div class="row text-center">
+      <div class="col-md-4">
+      <img src="<%= profilePic.includes('imgs/') ? '/' + profilePic : profilePic %>" alt="Profile Picture" class="rounded-circle img-thumbnail mx-auto profile-thumb">
+      </div>
+      <div class="col-md-8">
+        <h2><%=userName%></h2>
+        <p><%=bio%></p>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        <a class="btn btn-outline-secondary" href="/profile">Your Profile</a>
+      </div>
+    </div>
+    <hr>
+    <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid rounded" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+  </div>
+
+
+
+ <%- include('partials/footer') -%>

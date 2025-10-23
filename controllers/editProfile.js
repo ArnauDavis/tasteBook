@@ -1,10 +1,24 @@
 const cloudinary = require("../middleware/cloudinary");
-const User = require("../models/User")
+const User = require("../models/User");
+const Post = require("../models/Post");
 
 module.exports = {
     editProfile: async (req, res) => {
         try {
           res.render("editProfile.ejs", {page: req.url, user:req.user, bio:req.user.bio, profilePic: req.user.profilePic });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      viewProfile: async (req, res) => {
+        try {
+            const post = await Post.findById(req.params.id);
+            const postCreator = await User.findById(post.user);
+            const posts = await Post.find({ user: postCreator.id }).sort({ createdAt: "desc" });
+            const profilePic = postCreator.profilePic 
+            const bio = postCreator.bio
+            const userName = postCreator.userName
+          res.render("visitProfile.ejs", {posts: posts, profilePic: profilePic, bio: bio, userName: userName });
         } catch (err) {
           console.log(err);
         }
