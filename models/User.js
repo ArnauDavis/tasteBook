@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   bio: {type: String, 
-      default: 'This is where my bio would be if I had one'
+      default: 'This is where my bio would be if I had one',
+      maxlength: 250
       },
   profilePic:{type: String,
         default:"imgs/defaultProfilePic.png"

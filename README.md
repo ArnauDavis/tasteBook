@@ -49,3 +49,10 @@ check back for updates!
 "<a class="nav-link <%= page=='/profile' ? 'active' : '' %>" href="/profile">
 <h1 class="h2"><%= page=='/feed' ? 'Dashboard' : page=='/profile' ? user.userName+"'s Profile" : ''  %></h1>"
 
+
+
+
+
+
+
+

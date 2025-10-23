@@ -2,43 +2,26 @@
 
 <div class="container py-3">
     <h2 class="mb-4">User Settings</h2>
-    <form>
+    <form action="/editProfile/updateProfile?_method=PUT" enctype="multipart/form-data" method="POST">
         <div class="row mb-4">
-            <div class="col-md-6">
+            <div class="col-md-6 mx-auto">
                 <h4>Change profile pic & or bio</h4>
                 <div class="mb-3">
                     <label for="bio" class="form-label">Bio</label>
-                    <input type="text" class="form-control" id="bio" value="<%=bio%>">
+                    <input type="text" class="form-control" id="bio" name="bio" value="<%=bio%>">
                 </div>
-            </div>
-            <div class="col-md-6">
                 <h4>Profile Picture</h4>
-                <div class="mb-3">
-                    <img src="<%=profilePic%>" alt="Profile Picture" class="mb-2 rounded-circle img-thumbnail mx-auto">
-                    <input class="form-control" type="file" id="profilePicture">
+                <div class="mb-3 d-flex flex-column align-items-center">
+                    <img src="<%=profilePic%>" alt="Profile Picture" class="mb-2 rounded-circle img-thumbnail profile-thumb mx-auto">
+                    <input class="form-control" type="file" name="file" id="profilePicture">
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/profile" class="btn btn-secondary me-md-2">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-secondary me-md-2">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
     </form>
-    <!-- <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Post</button>
-            </form> -->
 </div>
 
 <%- include('partials/footer') -%>
