@@ -9,7 +9,11 @@
                 <div class="col-12 col-md-8 col-lg-6 mx-auto"> 
                     
                     <div class="card row justify-content-center mt-3 pt-3 bg-light">
-
+                        <a class="text-decoration-none mb-3" 
+                               href="<%= visitorId == posts[i].user._id.toString() ? '/profile' : '/visitProfile/' + posts[i].user._id %>">
+                            <img src="<%= posts[i].user && posts[i].user.profilePic ? posts[i].user.profilePic : '/imgs/defaultProfilePic.png' %>" alt="User Avatar" class="user-avatar">
+                            <span class="gradient-text"><%= posts[i].user.userName %></span>
+                        </a>
                         <a href="/post/<%= posts[i]._id%>">
                             <img class="card-img-top rounded" src="<%= posts[i].image%>" alt="<%= posts[i].title %>">
                         </a>

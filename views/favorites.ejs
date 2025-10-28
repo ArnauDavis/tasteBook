@@ -5,6 +5,11 @@
             <li class="mt-4 ">
                 <a href="/post/<%= posts[i]._id%>" class="text-decoration-none">
                 <div class="card row justify-content-center mt-3 mb-4 pt-3 bg-light w-100 w-sm-90 w-md-75 w-lg-50 mx-auto rounded">
+                    <a class="text-decoration-none mb-3" 
+                               href="<%= visitorId == posts[i].user._id.toString() ? '/profile' : '/visitProfile/' + posts[i].user._id %>">
+                            <img src="<%= posts[i].user && posts[i].user.profilePic ? posts[i].user.profilePic : '/imgs/defaultProfilePic.png' %>" alt="User Avatar" class="user-avatar">
+                            <span class="gradient-text"><%= posts[i].user.userName %></span>
+                        </a>
                     <a href="/post/<%= posts[i]._id%>">
                         <img class="card-img-top" src="<%= posts[i].image%>" alt="<%= posts[i].title %>">
                     </a>
