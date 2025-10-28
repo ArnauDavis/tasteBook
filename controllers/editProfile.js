@@ -12,13 +12,13 @@ module.exports = {
       },
       viewProfile: async (req, res) => {
         try {
-            const post = await Post.findById(req.params.id);
-            const postCreator = await User.findById(post.user);
-            const posts = await Post.find({ user: postCreator.id }).sort({ createdAt: "desc" });
-            const profilePic = postCreator.profilePic 
-            const bio = postCreator.bio
-            const userName = postCreator.userName
-          res.render("visitProfile.ejs", {posts: posts, profilePic: profilePic, bio: bio, userName: userName });
+        const profileUserId = req.params.id; 
+        const postCreator = await User.findById(profileUserId); 
+        const posts = await Post.find({ user: postCreator._id }).sort({ createdAt: "desc" }).lean();
+        const profilePic = postCreator.profilePic; 
+        const bio = postCreator.bio;
+        const userName = postCreator.userName;
+        res.render("visitProfile.ejs", {posts: posts, profilePic: profilePic, bio: bio, userName: userName, visitorId: req.user.id }); // Added visitorId for your EJS links
         } catch (err) {
           console.log(err);
         }

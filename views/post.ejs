@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/visitProfile/<%= post.id %>">
+                        <a class="nav-link active" href="<%= visitorId == post.user.toString() ? '/profile' : '/visitProfile/' + post.user %>">
                             <i class="bi bi-journal-text me-2"></i>
                             Visit <%=user+"'s Profile" %>
                         </a>
@@ -44,7 +44,7 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <a href="/visitProfile/<%= post.id %>" class="text-decoration-none"><h1 class="h2"><%=user+"'s Post" %></h1></a>
+            <a href="<%= visitorId == post.user.toString() ? '/profile' : '/visitProfile/' + post.user %>" class="text-decoration-none"><h1 class="h2"><%=user+"'s Post" %></h1></a>
             <button id="sidebarToggle" class="btn btn-primary d-md-none">
                     <i class="bi bi-list"></i>
                 </button>
