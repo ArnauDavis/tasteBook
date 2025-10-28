@@ -51,7 +51,7 @@
         </div>
 
       <div class="row justify-content-center">
-        <div class="card row justify-content-center mt-3 mb-4 pt-3 bg-light w-75 w-sm-50 w-md-25 mx-auto rounded">
+        <div class="card row justify-content-center mt-3 mb-4 pt-3 bg-light w-100 w-sm-90 w-md-75 w-lg-50 mx-auto rounded">
           <img src="<%= post.image%>" class="card-img-top img-fluid rounded" alt="Product Image">
           <div class="card-body">
               <h5 class="card-title"><%= post.title %></h5>
@@ -109,37 +109,44 @@
             </div>
             <!-- Comments -->
             <div class="comments-list">
-             <ul>
-              <% for(var i=0; i<comment.length; i++) {%>
-                <% for(var i=0; i<comment.length; i++) {%>
-            <div class="comment-box">
-                <div class="d-flex gap-3">
-                    <a class="text-decoration-none" href="<%= visitorId == comment[i].user._id ? '/profile' : '/visitProfile/' + comment[i].post._id %>"><img src="<%= comment[i].user.profilePic%>" alt="User Avatar" class="user-avatar"></a>
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <a class="text-decoration-none" href="<%= visitorId == comment[i].user._id ? '/profile' : '/visitProfile/' + comment[i].post._id %>"><h6 class="mb-0"><%= comment[i].user.userName%></h6></a>
-                            <span class="comment-time"><%= timeSince(comment[i].createdAt) %></span>
-                        </div>
-                        <p class="mb-2"><%= comment[i].comment%></p>
-                        <div class="comment-actions">
-                            <!-- <a href="#"><i class="bi bi-heart"></i> Like</a> -->
-                             <%if(comment[i].user._id == visitorId || postProfile == visitorId){ %>
-                                <form
-                                  action="/comment/deleteComment/<%= comment[i]._id %>/<%= post._id %>?_method=DELETE"
-                                  method="POST"
-                                  class="col-3"
-                                >
-                                  <button type="submit" class="btn btn-link text-danger p-0 text-decoration-none" title="Delete Comment"><i class="bi bi-trash"></i></button>
-                                </form>
-                            <%}%>
-                            
+            <ul class="list-unstyled">
+            <% for(var i=0; i<comment.length; i++) {%>
+                <li>
+                    <div class="comment-box">
+                        <div class="d-flex gap-3">
+
+                            <a class="text-decoration-none" 
+                               href="<%= visitorId == comment[i].user._id.toString() ? '/profile' : '/visitProfile/' + comment[i].user._id %>">
+                                <img src="<%= comment[i].user.profilePic%>" alt="User Avatar" class="user-avatar">
+                            </a>
+
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <a class="text-decoration-none" 
+                                       href="<%= visitorId == comment[i].user._id.toString() ? '/profile' : '/visitProfile/' + comment[i].user._id %>">
+                                       <h6 class="mb-0"><%= comment[i].user.userName%></h6>
+                                    </a>
+                                    <span class="comment-time"><%= timeSince(comment[i].createdAt) %></span>
+                                </div>
+
+                                <p class="mb-2"><%= comment[i].comment%></p>
+
+                                <div class="comment-actions">
+                                    <% if(comment[i].user._id.toString() == visitorId || postProfile == visitorId){ %>
+                                        <form
+                                            action="/comment/deleteComment/<%= comment[i]._id %>/<%= post._id %>?_method=DELETE"
+                                            method="POST"
+                                            class="col-3"
+                                        >
+                                            <button type="submit" class="btn btn-link text-danger p-0 text-decoration-none" title="Delete Comment"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    <%}%>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <%}%>
                 </li>
-            <% } %>
+            <%}%>
             </ul>
             </div>
           </div>
@@ -148,7 +155,7 @@
               <a href="/feed"><button class="btn btn-primary btn-sm">Return to Feed</button></a>
           </div>
       </div>
-
+      </div>
 
 </main>
     </div>
