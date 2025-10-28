@@ -24,6 +24,8 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
       try {
+        console.log(req)
+
         if (!req.params.id) {
           return res.status(400).send({ message: "Missing required fields to delete comment" });
         }
@@ -31,7 +33,8 @@ module.exports = {
         await Comment.deleteOne({ _id: req.params.id });
 
         console.log("Deleted comment");
-        return res.status(200).send({ message: "Comment deleted successfully" });
+        
+        res.redirect("/post/" + req.params.postId);
       } catch (err) {
         console.error(err);
         return res.status(500).send({ message: "Failed to delete comment" });
