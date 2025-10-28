@@ -26,7 +26,7 @@ module.exports = {
     try {
       const posts = await Post.find({ favorites: req.user.id }).sort({ createdAt: "desc" });
       const comments = await Comments.find({posts: req.params.id}).lean();
-      res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user, comments: comments });
+      res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user, comments: comments, timeSince: helpers.timeSince });
     } catch (err) {
       console.log(err);
     }

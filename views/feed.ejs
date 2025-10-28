@@ -5,42 +5,45 @@
         <% for(var i=0; i<posts.length; i++) {%>
             
             <li class="mt-4">
+                <a href="/post/<%= posts[i]._id%>" class="text-decoration-none">
                 <div class="col-12 col-md-8 col-lg-6 mx-auto"> 
                     
                     <div class="card row justify-content-center mt-3 pt-3 bg-light">
-                        
+
                         <a href="/post/<%= posts[i]._id%>">
                             <img class="card-img-top rounded" src="<%= posts[i].image%>" alt="<%= posts[i].title %>">
                         </a>
-                        
+
                         <div class="card-body">
-                            <h5 class="card-title"><%= posts[i].title %></h5>
-                            <p class="card-text"><%= posts[i].caption %></p>
-                            
+                            <a href="/post/<%= posts[i]._id%>" class="text-decoration-none text-dark"><h5 class="card-title"><%= posts[i].title %></h5><a>
+                            <a href="/post/<%= posts[i]._id%>" class="text-decoration-none text-dark"><p class="card-text"><%= posts[i].caption %></p></a>
+
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                
+
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-chat-left-text text-secondary me-1"></i>
+                                    <a href="/post/<%= posts[i]._id%>" class="text-decoration-none"><i class="bi bi-chat-left-text text-secondary me-1"></i></a>
                                     <small class="text-muted me-2">
                                         <%= comments.filter(x => x.post.toString() == posts[i]._id.toString()).length %>
                                     </small>
                                 </div>
                             
                                 <div class="d-flex align-items-center">
-                                    <i class="fa fa-heart text-danger me-1"></i>
+                                    <a href="/post/<%= posts[i]._id%>" class="text-decoration-none"><i class="fa fa-heart text-danger me-1"></i></a>
                                     <small class="text-muted me-2">
                                         <%= posts[i].favorites.length %>
                                     </small>
                                 </div>
                             
                             </div>
-                            
-                            <span class="comment-time"><%= timeSince(posts[i].createdAt) %></span>
-                            
+
+                            <a href="/post/<%= posts[i]._id%>" class="text-decoration-none"><span class="comment-time"><%= timeSince(posts[i].createdAt) %></span></a>
+
                             </div>
                     </div>
                     
+
                 </div>
+                </a>
             </li>
         <% } %>
     </ul>
