@@ -15,7 +15,9 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("mainDash.ejs", {page: req.url, posts: posts, visitorId: req.user.id });
+      const comments = await Comments.find({posts: req.params.id}).lean();
+      
+      res.render("mainDash.ejs", {page: req.url, posts: posts, visitorId: req.user.id, comments: comments, timeSince: helpers.timeSince });
     } catch (err) {
       console.log(err);
     }
@@ -23,7 +25,8 @@ module.exports = {
   getFavorites: async (req, res) => {
     try {
       const posts = await Post.find({ favorites: req.user.id }).sort({ createdAt: "desc" });
-      res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user });
+      const comments = await Comments.find({posts: req.params.id}).lean();
+      res.render("mainDash.ejs", {page: req.url, posts: posts, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
