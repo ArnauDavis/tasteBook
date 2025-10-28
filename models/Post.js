@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    maxlength: 250
   },
   image: {
     type: String,
@@ -16,6 +17,7 @@ const PostSchema = new mongoose.Schema({
   caption: {
     type: String,
     required: true,
+    maxlength: 350
   },
   // likes: {
   //   type: Number,

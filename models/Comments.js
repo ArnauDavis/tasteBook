@@ -4,6 +4,7 @@ const CommentSchema = new mongoose.Schema({
     comment: {
     type: String,
     required: true,
+    maxlength: 350
     },
     likes: {
       type: Number,
