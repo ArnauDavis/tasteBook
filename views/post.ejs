@@ -88,7 +88,7 @@
                       <small class="text-muted me-2"><%= comment.length %></small>
                     <i class="fa fa-heart text-danger me-1"></i>
                       <small class="text-muted me-2"><%= post.favorites.length %></small>
-                    <%if(post.user == visitorId){ %>
+                    <%if(postProfile == visitorId){ %>
                       <form
                         action="/post/deletePost/<%= post.id %>?_method=DELETE"
                         method="POST"

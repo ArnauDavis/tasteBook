@@ -41,7 +41,7 @@ module.exports = {
       const visitorId = req.user.id
       const visitorPic = req.user.profilePic
       const picTest = req.user.cloudinaryId
-      console.log(post.user)
+      
       res.render("post.ejs", {page: req.url, post: post, user: userName, comment: comments, postProfile: postProfile, visitorId:visitorId, visitorPic: visitorPic, picTest: picTest, timeSince: helpers.timeSince});
     } catch (err) {
       console.log(err);
