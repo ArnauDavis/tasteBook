@@ -33,7 +33,7 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id).populate('user');
       const postCreator = await User.findById(post.user);
       const comments = await Comments.find({post: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean();
       const postProfile = postCreator.id 
