@@ -40,7 +40,8 @@ module.exports = {
       const userName = postCreator.userName
       const visitorId = req.user.id
       const visitorPic = req.user.profilePic
-      res.render("post.ejs", {page: req.url, post: post, user: userName, comment: comments, postProfile: postProfile, visitorId:visitorId, visitorPic: visitorPic, timeSince: helpers.timeSince});
+      const picTest = req.user.cloudinaryId
+      res.render("post.ejs", {page: req.url, post: post, user: userName, comment: comments, postProfile: postProfile, visitorId:visitorId, visitorPic: visitorPic, picTest: picTest, timeSince: helpers.timeSince});
     } catch (err) {
       console.log(err);
     }

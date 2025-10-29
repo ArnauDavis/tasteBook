@@ -101,7 +101,7 @@
             <!-- New Comment Form -->
             <div class="my-4">
                 <div class="d-flex gap-3">
-                    <img src="<%= visitorId.profilePic ? visitorId.profilePic : '/imgs/defaultProfilePic.png' %>" alt="User Avatar" class="user-avatar">
+                    <img src="<%= picTest ? visitorPic : '/imgs/defaultProfilePic.png' %>" alt="User Avatar" class="user-avatar">
                     <div class="flex-grow-1">
                         <form action="/comment/createComment/<%= post._id%>" method="POST">
                             <input type="text" class="form-control comment-input" rows="3" placeholder="Write a comment..." id="comment" name="comment">
