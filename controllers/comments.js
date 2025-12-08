@@ -24,7 +24,6 @@ module.exports = {
   },
   deleteComment: async (req, res) => {
       try {
-        console.log(req)
 
         if (!req.params.id) {
           return res.status(400).send({ message: "Missing required fields to delete comment" });
