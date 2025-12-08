@@ -74,12 +74,12 @@ In the views folder, I have a sub folder for partials, a footer and a header, ev
 
 ## Optimizations
 
-The styling leaves much to be desired, but some would say a little bit of CSS goes a long way. Accounts could also be introduced to save previous recipes that users really enjoyed. A loading icon to indicate that submissions have been successfully received and that the response from the Hugging Face API is pending would also be a nice addition. *update: I added a loading icon, how cool!*
+
 
 
 ## Lessons Learned:
 
-Messing around with the Hugging Face API was a great way to learn how to talk to AIs with code. I got a ton of practice passing props to various components, as well as practice using useState to dynamically update the list of ingredients rendered on the page.
+
 
 
 
