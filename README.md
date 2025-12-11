@@ -5,7 +5,7 @@ Where every dish is a discovery. Join the food crave. TasteBook brings food crea
 **Link to project:** https://tastebook-g3xq.onrender.com/
 
 <div style="height: 200px; overflow: hidden;">
-    <img src="" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="tastebook-gif"/>
+    <img src="public/imgs/tastegif.gif" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="tastebook-gif"/>
 </div>
 
 **Tech used:** EJS, Bootstrap, MongoDB
