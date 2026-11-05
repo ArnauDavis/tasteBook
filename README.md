@@ -1,5 +1,5 @@
 # TasteBook
-Where every dish is a discovery. Join the food crave. TasteBook brings food creators and connoisseurs together to unite.
+A social platform where food lovers can share recipes, discover new dishes, and connect through their love of food.
 
 
 **Link to project:** https://tastebook-g3xq.onrender.com/
@@ -8,56 +8,100 @@ Where every dish is a discovery. Join the food crave. TasteBook brings food crea
     <img src="public/imgs/tastegif.gif" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="tastebook-gif"/>
 </div>
 
-**Tech used:** EJS, Bootstrap, MongoDB
+**Tech used:** EJS, Bootstrap, MongoDB, Cloudinary
 
+<br>
 
 ## How It's Made:
 
-Tastebook is built with a mvc architecture. There is a model folder that holds everything concerning the structuring of data like comments, posts, users, etc. There is a views folder that holds everything concerning any part of the UI that is visible to the users such as their profile, login pages, and anything else they see. Finally, we have what I would argue is the most important part, the controller folder. Here is where the logic that provides the user experience, functions that handle the process of making a post, commenting on a post, updating a profile, or deleting a post. There is a middleware folder, there is where the ability to check that a user is logged in, connect to cloudinary to post or delete photos, or even be able to upload images of many data types, comes from.
-In the model folder I use Mongoose to create my schemas, the user schema includes paths for a user name, email, hashed password, a bio, and a profile picture. The bio and profile picture have default values until the user customizes them. The posts schema includes a title, image, caption, post creator, likes, and a created at path. And lastly in the models folder, I have a schema for the comments which will have the comment itself, the amount of likes on the comment, the post that it is attached to, the user who made the comment, and of course, when it was created. The way I have my schemas defined makes it relatively easy to make the necessary connections to have the data conveniently organized. Everything gets a unique ID, with these IDs, every post can be linked to its creator, the same for comments, and on the topics of comments, comments can easily be tied to the post they were created under. 
-<br>
-<br>
+TasteBook is a full stack social application built using the MVC architecture. Users can create accounts, customize their profiles, share food posts, interact with other users through likes and comments, and browse a feed of community posts.
 
-In the views folder, I have a sub folder for partials, a footer and a header, every great website has a footer and a header, writing out a footer and header for every single page would be a headache so being able to just insert partials is really nice. In the user experience journey, the landing page gives users the option to log in or sign up. From there they are redirected to their profile. The profile ejs will display their username, as well as their bio, profile pic, and posts should they have posted anything. This is all retrieved from MongoDB thanks to the robust backend that can retrieve all of this data based on their unique ID. I wanted to limit the amount of posts users could create so I set a conditional that checks the length of the posts object in the database and if it is longer than 4, the form that lets users create a new post does not render and instead shows a span indicating to users that they cannot have more than 4 posts. 
-
-
-Speaking of posts, the post ejs has a lot of interesting pieces that bring the whole experience together. Starting from the top, each post will render the username and profile picture of the post creator. There is a conditional that will check if the ID of the person visiting the post is the same ID of the person who made the post, if it is a match, clicking the user name or picture, will redirect to the profile of the visitor/post creator with full editing functionality, otherwise if it is not a match, the person visiting the post will redirect to the post creator’s profile picture as a visitor, as a visitor they will not have editing privileges. When visiting a profile of another user, visitors will be able to see their user name, profile picture, bio, and a section of all the posts of the user they are visiting. Moving forward, there is the post image itself, as well as a title for the post and a caption. Below the caption will be how long it has been since the post was created, a heart icon that can be clicked to like the post, a count of how many likes the post has and how many comments the post has. Below there is a form prompting the user to leave a comment. And then there are the actual comments themselves, each comment will have the profile picture and user name of the commentor, the profile picture and user name follow the same logic as the post creator image and user name where it checks the ID of the current user and the ID of the commentor creator to decide where to redirect if clicked. And addition to this logic is the deletion ability of each comment. Each comment can only be deleted by the ID of the person who created or the ID of the person who made the post. Similarly the post itself can only be deleted by the ID of the user who created it. Finally users have two buttons, one to return to their profile or go to the feed. The feed is a cumulation of all the posts sorted by their creation date. Each post in the feed will have the user name and profile picture of the creator, the image of the post, the title, caption, comment count, and likes count. 
-On the topic of likes, there is a page for all the user’s likes, it renders similarly to the main feed except here, it is only posts that the user has liked. I mentioned earlier that having partials for the footer and header was convenient so that I did not have to code out the same parts over and over again, following this idea, I did the same for the profile, feed, and favorites. These all render inside of the mainDash.ejs where a conditional is listening for the route the user is visiting. The mainDash has a chained ternary (not popular to use I know, but I liked the aesthetic of it) to have the top of the page to indicate which page the user is on. I also have a hamburger menu that appears on mobile devices, when clicked, it opens up to show links to the main feed, user profile, and user likes, as well as a log out button, using similar logic as the section that determines which page to render, the page the user is currently on is highlighted in this menu. On larger screens, this menu is permanently on the left side of the page.
-<br>
 <br>
 
-Wrapping things up in the controller part of the app, a quick walk through the auth.js will demonstrate how signing up, logging in, logging out, and session management is handled. 
-The next thing I’d like to comment on is well… the comments controller. Here is how I create or delete comments. Comments are made following the structure defined in their model file, a very important part of this structure is getting the post the comment is attached to as well as the person who made the comment, this is important because it will be used to make sure the comment renders under the correct post and the user who makes the comment can be attached to the comment. Mongoose makes the process of adding and deleting comments very easy with the methods ‘create’ and ‘deleteOne’. As the name implies, create will create a comment and deleteOne will delete one comment. Once either a comment is created or deleted, a redirect to the post is triggered to fresh the page and have the result render on the page for the user to see. 
+> Database Architecture
 
+I used MongoDB and Mongoose to structure the application's data into three primary models: Users, Posts, and Comments.
 
-I’ve spoken about comments and how they’re connected to a post, so now to talk about the post controller. This controller is responsible for getting the main feed of posts, the user’s likes feed, individual posts, liking or unliking a post, as well as creating or deleting a post. This controller provides the data for user profiles. Getting the feed uses an interesting method chain in Mongoose, all of the posts are stored in a variable that uses find().populate('user').sort({ createdAt: "desc" }).lean() in a chain, finding all the posts, populating them with user data(user names, profile pictures, etc), sorting them from when they were created so newer posts show first, and then leaning them so that I am not getting any extra bloat from Mongoose but just the plain JavaScript objects. Getting the feed of likes works the same way except here, in the find method, I only look for posts whose favorite property, includes the id of the requesting user. 
-Retrieving individual posts finds by ID as opposed to finding every post in the DB, the ID being that of the post being requested. Any comments that have the id of the post in question in their post property are also retrieved. I also keep track of the creator and visitor IDs here for making comments, deleting comments, or deleting the post itself if the ID of the post creator matches the ID of the visiting ID. 
-Liking or unliking a post modifies the array property in the post that holds all of the IDs of users who have liked the post. Here Mongoose has a method called findByIdAndUpdate, from there the ID of the user liking or unliking the post is pushed or pulled from the array depending on the action. 
+Each model has its own schema defining the information it stores and how it relates to other documents.
+* *Users*: Store usernames, email addresses, hashed passwords, bios, and profile pictures.
+* *Posts*: Store titles, images, captions, creation dates, likes, and references to their creators.
+* *Comments*: Store comment content, likes, creation dates, and references to both the post and user associated with them.
 
+Using Mongoose ObjectIds allowed me to establish relationships between these collections. For example, posts reference their creators, while comments reference both their authors and the posts they belong to. This made retrieving related information throughout the application much easier.
 
-Deleting a post not only deletes the post from the DB but also deletes the photo stored on Cloudinary to save on space and prevent a cumulation of photos that are no longer needed. To remove a post from the DB, it is the deleteOne method while Cloudinary uses one a little more dramatic called destroy.
+<br>
 
-I have the getProfile function in the posts controller because just like the profile will render a user bio and profile picture, it will also have the collection of all the posts by the user, and so keeping that all together made sense to me. When directed to the appropriate page, this function will give the page everything it needs to render a customized page for the user, that being the posts, bio, and profile picture.
-On the topic of profiles, I’d like to bring attention to the editProfile controller. This controller brings in the page that presents the form for customizing a profile for viewers to see. The profile page that a user sees when visiting their own profile is different than the one they see when visiting someone else’s. As a result here in editProfile, the viewProfile function will be found, populating the appropriate page the necessary data for a visiting user, as well as making it easier for my logic to understand this page is being visited by a visitor and not the owner of the profile. Updating the profile will remove the old profile picture from Cloudinary and upload the replacement, as well as update the bio. If no changes are made, the original photo is kept, the same is true for the bio. Once the function finishes, the result is saved onto the DB.
+>User Authentication and Authorization
 
+I implemented user authentication using Passport.js, allowing users to register, log in, and maintain authenticated sessions. Passport handles the authentication process, while session management keeps users logged in as they navigate the application.
+
+I also implemented authorization checks to ensure users can only modify content they're permitted to access.
+
+For example, users can only delete their own posts, while comments can be deleted by either their creator or the owner of the post they belong to. Visiting another user's profile also removes editing privileges.
+
+<br>
+
+>Posts and Social Interactions
+
+Users can create posts containing images, titles, and captions. Images are uploaded to Cloudinary, while the remaining post information is stored in MongoDB.
+
+Posts support likes and comments, allowing users to interact with content from the community. I used an array of MongoDB ObjectIds to keep track of users who liked each post, making it possible to add or remove likes by updating that array.
+
+The application also includes a personalized favorites page that retrieves posts liked by the current user.
+
+<br>
+
+>Dynamic Content and Views
+
+I used EJS to render dynamic content based on the information retrieved from MongoDB.
+
+The application includes reusable partials for shared elements such as the header and footer, as well as larger sections of the dashboard.
+
+Conditional rendering is used throughout the application to determine what users can see and interact with depending on their current page and whether they own the content.
+
+<br>
 
 ## Optimizations
 
-Tastebook is an expansive project with room for improvement and features just waiting to be added. Most importantly, I could have the post ejs render in the mainDash ejs for a cleaner code base. This could be done by giving all variables the same name across functions so that the data is defined globally and accessible anywhere in the scope the controller. Visiting a profile does not render the sidebar that is visible on other pages, this could also be solved by putting the viewProfile function in the post controller with globally defined variables. 
-Features I would like to add are
-  •	An array in the user model to store friends, giving way to a process of adding or removing friends to keep track of new posts from other users
+There are several areas where I would like to improve the application:
 
-  •	Revealing who liked your post, I already store the IDs of users who liked a post, it wouldn’t be too difficult to have a clickable list of those user names
-
-  •	Comments could have the ability to be liked
-
-  •	The main feed could have the comment with the highest like count also render underneath the comments icon
+* Refactor the dashboard views to reduce duplicated rendering logic.
+* Implement a friendship system so users can connect and keep track of each other's posts.
+* Allow users to see who liked their posts.
+* Add the ability to like individual comments.
+* Display the most liked comment directly within the main feed.
 
 
 ## Lessons Learned:
 
-Bootstrap played an integral role in designing this app. I learned a great deal customizing prebuilt components to suit my own needs. I learned a lot playing around with Mongoose to create and modify data, I cannot stress enough how easy Mongoose makes this process with method names like create, findById, findByIdAndUpdate,or deleteOne. In the post model, the users who liked the post can have their IDs stored in an array, an idea I had when I was thinking about the architecture of this app that I did not know how to implement, only to learn it was much easier than I thought: [mongoose.Schema.Types.ObjectId]. Lastly, there are many things that are rendered based on conditional logic. Ejs has it’s own syntax for inline JavaScript, with all the practice I got using this syntax, the process of ternary logic for rendering was really hammered home and it is used widely through out the app. 
 
+>Working with Mongoose and Data Relationships
+
+I learned how to structure MongoDB documents using Mongoose schemas and establish relationships using ObjectIds. One particularly useful discovery was how easily arrays of ObjectIds could be used to track relationships, such as the users who liked a particular post.
+
+<br>
+
+>Retrieving Related Data with Populate
+
+I learned how to use Mongoose's populate() method to retrieve related documents. This allowed me to retrieve information such as a post creator's username and profile picture without manually querying each user. I also became familiar with chaining methods such as find(), populate(), sort(), and lean() to retrieve and prepare data for rendering.
+
+<br>
+
+>Conditional Rendering with EJS
+
+Throughout the application, I used EJS to conditionally render content based on the current user, page, and ownership of posts or comments. Working extensively with EJS's embedded JavaScript syntax strengthened my understanding of conditional logic and how server-side rendering works.
+
+<br>
+
+>Working with Cloudinary
+
+I learned how to integrate Cloudinary for image uploads and deletion. One important detail was making sure that deleting a post also removed its associated image from Cloudinary, preventing unnecessary files from accumulating.
+
+<br>
+
+>Customizing Bootstrap Components
+
+I learned how to work with Bootstrap's prebuilt components and customize them to better fit the application's design rather than relying entirely on their default appearance.
 
 
 
